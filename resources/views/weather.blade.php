@@ -10,8 +10,9 @@
         @if($weatherStatus != 'empty')
         <ul class="nav nav-tabs">
             @foreach($followedCities->cities as $city)
-            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#m{{$loop->iteration}}">{{$city->name}}</a></li>
+            <li class="nav-item"><a class="nav-link @if($loop->first) active @endif" data-toggle="tab" href="#m{{$loop->iteration}}">{{$city->name}}</a></li>
             @endforeach
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#mnew">+</a></li>
         </ul>
         <div class="tab-content p-3" id="weathermain">
             @foreach($followedCities->cities as $city)
@@ -44,8 +45,24 @@
                     </tr>
                     @endforeach
                 </table>
+
             </div>
             @endforeach
+            <div id="mnew" class="tab-pane fade in">
+                <h3>Add city</h3>
+                <p>
+                <form action="{{route('follow')}}" method="GET">
+                    <div class="form-group">
+                        <label for="new">Name</label>
+                        <input type="text" name="new" id="new" value="" class="form-control">
+                        @if($errors->has('new'))
+                         <span class="text-danger"> {{ $errors->first('new') }}</span>
+                         @endif
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+                </p>
+            </div>
         </div>
         @else
         Brak miast

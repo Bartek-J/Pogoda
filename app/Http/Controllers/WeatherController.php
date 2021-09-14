@@ -32,21 +32,21 @@ class WeatherController extends Controller
         }
         return view('weather',compact('followedCities','weatherStatus'));   
     }
-    public function delete(Request $request)
+    public function delete($city_id)
     {
         $id=Auth::user()->id;
-        $unfollow=FollowedCity::where('user_id',$id)->where('city_id',$request->id)->findOrFail();
+        $unfollow=FollowedCity::where('user_id',$id)->where('city_id',$city_id)->findOrFail();
         $unfollow->delete();
         return back();
     }
     public function add(Request $request)
     {
-        $city=City::where('name',$request->name)->findOrFail();
-        $id=Auth::user()->id;
-        $follow=new FollowedCity;
-        $follow->user_id=$id;
-        $follow->city_id=$city->id;
-        $follow->save();
+        $city=City::where('name',$request->new)->first();
+            $id=Auth::user()->id;
+            $follow=new FollowedCity;
+            $follow->user_id=$id;
+            $follow->city_id=$city->id;
+            $follow->save();
         return back();
     }
 }
