@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FollowedCity;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Models\City;
 
 class WeatherController extends Controller
 {
@@ -12,7 +14,8 @@ class WeatherController extends Controller
     {
         $id=Auth::user()->id;
         $followedCities = User::with('cities')->findOrFail($id);
-        //dd($followedCities);
+        if(count($followedCities->cities)!=0)
+        {
         $i=0;
         foreach($followedCities->cities as $city)
         {
@@ -22,9 +25,28 @@ class WeatherController extends Controller
             $weatherStatus[$i]=$content;
             $i++;
         }
-        //dd($weatherStatus);
-        return view('weather',compact('followedCities','weatherStatus'));
-        
-        
+        }
+        else
+        {
+            $weatherStatus='empty';
+        }
+        return view('weather',compact('followedCities','weatherStatus'));   
+    }
+    public function delete(Request $request)
+    {
+        $id=Auth::user()->id;
+        $unfollow=FollowedCity::where('user_id',$id)->where('city_id',$request->id)->findOrFail();
+        $unfollow->delete();
+        return back();
+    }
+    public function add(Request $request)
+    {
+        $city=City::where('name',$request->name)->findOrFail();
+        $id=Auth::user()->id;
+        $follow=new FollowedCity;
+        $follow->user_id=$id;
+        $follow->city_id=$city->id;
+        $follow->save();
+        return back();
     }
 }
