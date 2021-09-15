@@ -22,8 +22,20 @@
 }
 #allcontent
 {
+    margin-top:40px;
     border: 1px solid rgb(149, 185, 238);
     border-radius:10px;
-    padding:10px;
+    padding:20px;
     background-color: rgb(208, 220, 238);
+}
+#app
+{
+    background-color: rgb(211, 233, 236) !important;
+    min-height: 100vh !important;
+}
+#btnstatus
+{
+    float:right;
+    border:none;
+    background-color: transparent;
 }

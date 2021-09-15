@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\City;
+use App\Http\Requests\FollowRequest;
 
 class WeatherController extends Controller
 {
@@ -35,18 +36,49 @@ class WeatherController extends Controller
     public function delete($city_id)
     {
         $id=Auth::user()->id;
-        $unfollow=FollowedCity::where('user_id',$id)->where('city_id',$city_id)->findOrFail();
+        $unfollow=FollowedCity::where('user_id',$id)->where('city_id',$city_id)->first();
         $unfollow->delete();
         return back();
     }
-    public function add(Request $request)
+    public function add(FollowRequest $request)
     {
-        $city=City::where('name',$request->new)->first();
+            $city=City::where('name',$request->new)->first();
+            if($city == NULL)
+            {
+                return back()->with([
+                    'status' => [
+                        'type' => 'danger',
+                        'content' => "Couldn't find matching city in our database!"
+                    ]
+                ]);
+            }
             $id=Auth::user()->id;
+            $isFollowingAlready=FollowedCity::where('user_id',$id)->where('city_id',$city->id)->count();
+            if($isFollowingAlready!=0)
+            {
+                return back()->with([
+                    'status' => [
+                        'type' => 'danger',
+                        'content' => 'You already follow that city!'
+                    ]
+                ]);
+            }
+            $followedAmount=FollowedCity::where('user_id',$id)->count();
+            if($followedAmount>=5)
+            {
+                return back()->with([
+                    'status' => [
+                        'type' => 'danger',
+                        'content' => 'You cannot follow more than 5 cities at once!'
+                    ]
+                ]);
+            }
+            {
             $follow=new FollowedCity;
             $follow->user_id=$id;
             $follow->city_id=$city->id;
             $follow->save();
+            }
         return back();
     }
 }

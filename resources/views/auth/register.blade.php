@@ -68,6 +68,11 @@
                                 </button>
                             </div>
                         </div>
+                        <div class="form-group row mb-0 mt-2">
+                            <div class="col-md-8 offset-md-4">
+                                Already registered? Switch back to
+                        <a class="" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </div>
                     </form>
                 </div>
             </div>
