@@ -15,6 +15,7 @@ class WeatherController extends Controller
     {
         $id=Auth::user()->id;
         $followedCities = User::with('cities')->findOrFail($id);
+        $followedAmount=FollowedCity::where('user_id',$id)->count();
         if(count($followedCities->cities)!=0)
         {
         $i=0;
@@ -31,7 +32,7 @@ class WeatherController extends Controller
         {
             $weatherStatus='empty';
         }
-        return view('weather',compact('followedCities','weatherStatus'));   
+        return view('weather',compact('followedCities','weatherStatus','followedAmount'));   
     }
     public function delete($city_id)
     {

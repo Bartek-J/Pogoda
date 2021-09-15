@@ -10070,3 +10070,8 @@ h3 {
 .custom_a:hover {
   color: #ebf1fb !important;
 }
+
+.nav-custom {
+  border: 1px solid white !important;
+  margin-right: 5px;
+}

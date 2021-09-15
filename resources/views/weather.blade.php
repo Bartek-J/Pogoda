@@ -38,9 +38,11 @@
         @if($weatherStatus != 'empty')
         <ul class="nav nav-tabs">
             @foreach($followedCities->cities as $city)
-            <li class="nav-item"><a class="nav-link @if($loop->first) active @endif" data-toggle="tab" href="#m{{$loop->iteration}}">{{$city->name}}</a></li>
+            <li class="nav-item "><a class="nav-custom nav-link @if($loop->first) active @endif" data-toggle="tab" href="#m{{$loop->iteration}}">{{$city->name}}</a></li>
             @endforeach
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#mnew">+</a></li>
+            @if($followedAmount < 5)
+            <li class="nav-item "><a class="nav-link nav-custom" data-toggle="tab" href="#mnew">+</a></li>
+            @endif
         </ul>
         <div class="tab-content p-3" id="weathermain">
             @foreach($followedCities->cities as $city)
