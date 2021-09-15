@@ -109,7 +109,18 @@
             </div>
         </div>
         @else
-        Brak miast
+        <hr color="white"> 
+        <h3>Currently you're not following any city!</h3>
+        <form action="{{route('follow')}}" method="GET">
+                    <div class="form-group">
+                        <label for="new">Add new</label>
+                        <input type="text" name="new" id="new" value="" class="form-control">
+                        @if($errors->has('new'))
+                        <span class="text-danger"> {{ $errors->first('new') }}</span>
+                        @endif
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </form>
         @endif
     </div>
 </div>
