@@ -12,8 +12,8 @@
     border-bottom: 1px solid #dee2e6;
     border-left: 1px solid #dee2e6;
     border-right: 1px solid #dee2e6;
-    border-radius: 0,0,5px,5px;
-    background-color: rgb(208, 220, 238);
+    border-radius: 0 0 5px 5px;
+    background-color: rgb(167, 197, 243);
 }
 .clouds
 {
@@ -25,8 +25,9 @@
     margin-top:40px;
     border: 1px solid rgb(149, 185, 238);
     border-radius:10px;
-    padding:20px;
-    background-color: rgb(208, 220, 238);
+    padding:30px;
+    color:WHITE;
+    background-color: rgb(46, 107, 177);
 }
 #app
 {
@@ -38,4 +39,40 @@
     float:right;
     border:none;
     background-color: transparent;
+}
+.nav-link
+{
+    color:white ;
+}
+.nav-link:hover
+{
+    color:white !important;
+}
+.active
+{
+    background-color: rgb(167, 197, 243) !important;
+    color:rgb(255, 255, 255) !important;
+}
+.day8
+{
+    border-left:1px solid rgb(224, 235, 245);
+}
+.custom_ul
+{
+    font-size:110%;
+    list-style-type: none;
+}
+.custom_p
+{
+    font-size: 200%;
+}
+.custom_a
+{
+    color:white;
+    font-size: 110%;
+    font-style: italic;
+}
+.custom_a:hover
+{
+    color:rgb(235, 241, 251) !important;
 }

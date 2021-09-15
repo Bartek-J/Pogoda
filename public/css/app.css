@@ -10006,8 +10006,8 @@ h3 {
   border-bottom: 1px solid #dee2e6;
   border-left: 1px solid #dee2e6;
   border-right: 1px solid #dee2e6;
-  border-radius: 0, 0, 5px, 5px;
-  background-color: #d0dcee;
+  border-radius: 0 0 5px 5px;
+  background-color: #a7c5f3;
 }
 
 .clouds {
@@ -10019,8 +10019,9 @@ h3 {
   margin-top: 40px;
   border: 1px solid #95b9ee;
   border-radius: 10px;
-  padding: 20px;
-  background-color: #d0dcee;
+  padding: 30px;
+  color: WHITE;
+  background-color: #2e6bb1;
 }
 
 #app {
@@ -10032,4 +10033,40 @@ h3 {
   float: right;
   border: none;
   background-color: transparent;
+}
+
+.nav-link {
+  color: white;
+}
+
+.nav-link:hover {
+  color: white !important;
+}
+
+.active {
+  background-color: #a7c5f3 !important;
+  color: white !important;
+}
+
+.day8 {
+  border-left: 1px solid #e0ebf5;
+}
+
+.custom_ul {
+  font-size: 110%;
+  list-style-type: none;
+}
+
+.custom_p {
+  font-size: 200%;
+}
+
+.custom_a {
+  color: white;
+  font-size: 110%;
+  font-style: italic;
+}
+
+.custom_a:hover {
+  color: #ebf1fb !important;
 }
