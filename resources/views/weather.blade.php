@@ -19,7 +19,7 @@
             <div class="col-10 pl-4">
                 <h1>Weather Forecast</h1>
             </div>
-            <div class="nav-item dropdown col-2">
+            <div class="nav-item dropdown col-2 text-right pr-4">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                     {{ Auth::user()->name }}
                 </a>
@@ -40,14 +40,13 @@
             @foreach($followedCities->cities as $city)
             <li class="nav-item "><a class="nav-custom nav-link @if($loop->first) active @endif" data-toggle="tab" href="#m{{$loop->iteration}}">{{$city->name}}</a></li>
             @endforeach
-            @if($followedAmount < 5)
-            <li class="nav-item "><a class="nav-link nav-custom" data-toggle="tab" href="#mnew">+</a></li>
-            @endif
+            @if($followedAmount < 5) <li class="nav-item "><a class="nav-link nav-custom" data-toggle="tab" href="#mnew">+</a></li>
+                @endif
         </ul>
         <div class="tab-content p-3" id="weathermain">
             @foreach($followedCities->cities as $city)
             <div id="m{{$loop->iteration}}" class="tab-pane fade in @if($loop->first) active show @endif">
-                <div class="row pl-4">
+                <div class="row pl-4 mt-3">
                     <h2>{{$city->name}}, {{$city->country}}</h2>
                 </div>
                 <div class="row">
@@ -66,7 +65,7 @@
                             <li> Dew point: {{$weatherStatus[$loop->index]->current->dew_point}} °C</li>
                             <li>Sunrise: {{gmdate("g:ia", $weatherStatus[$loop->index]->current->sunrise);}}</li>
                             <li>Sunset: {{gmdate("g:ia", $weatherStatus[$loop->index]->current->sunset);}}</li>
-                            <li> <a href='https://openweathermap.org/city/{{$city->id}}' class="custom_a" target="_blank">More informations </a></li>
+                            <li> <a href='https://openweathermap.org/city/{{$city->id}}' class="custom_a" target="_blank">More info...</a></li>
                         </ul>
                     </div>
                     <div class="col-md-6 day8">
@@ -83,11 +82,16 @@
                             @endforeach
                         </table>
                     </div>
-                   
+                </div>
+                <div class="row">
                     <form class='col-lg-5 col-md-5' action="{{route('unfollow', $city->id)}}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Unfollow</button>
+                        <ul class="custom_ul">
+                            <li>
+                                <button type="submit" class="btn btn-danger">Unfollow</button>
+                            </li>
+                        </ul>
                     </form>
                 </div>
             </div>
@@ -109,18 +113,18 @@
             </div>
         </div>
         @else
-        <hr color="white"> 
+        <hr color="white">
         <h3>Currently you're not following any city!</h3>
         <form action="{{route('follow')}}" method="GET">
-                    <div class="form-group">
-                        <label for="new">Add new</label>
-                        <input type="text" name="new" id="new" value="" class="form-control">
-                        @if($errors->has('new'))
-                        <span class="text-danger"> {{ $errors->first('new') }}</span>
-                        @endif
-                    </div>
-                    <button type="submit" class="btn btn-primary">Add</button>
-                </form>
+            <div class="form-group">
+                <label for="new">Add new</label>
+                <input type="text" name="new" id="new" value="" class="form-control">
+                @if($errors->has('new'))
+                <span class="text-danger"> {{ $errors->first('new') }}</span>
+                @endif
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
         @endif
     </div>
 </div>
